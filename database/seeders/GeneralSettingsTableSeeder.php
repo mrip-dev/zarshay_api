@@ -13,7 +13,7 @@ class GeneralSettingsTableSeeder extends Seeder
         DB::table('general_settings')->updateOrInsert(
             ['id' => 1],
             [
-                'site_name' => 'Bloomix',
+                'site_name' => 'Zarshy',
                 'cur_text' => 'PKR',
                 'cur_sym' => 'PKR',
                 'email_from' => 'info@viserlab.com',
