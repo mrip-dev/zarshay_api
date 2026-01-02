@@ -88,7 +88,7 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>@lang('Sale')</label>
+                                        <label>@lang('Sale(%)')</label>
                                         <input class="form-control" name="sale" type="number"
                                             value="{{ old('sale', @$product->sale) }}">
                                     </div>
