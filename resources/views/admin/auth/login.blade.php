@@ -223,7 +223,7 @@
 
                 {{-- Dashboard Mockup Column (Left Side) --}}
                 <div class="col-md-6 dashboard-mockup-col">
-                    <img src="{{asset('assets/images/logo_icon/dashboard.png')}}" class="dashboard-mockup" alt="Dashboard Mockup">
+                    <img src="{{asset('assets/images/logo_icon/logo_light.png')}}" class="dashboard-mockup" alt="Dashboard Mockup">
                 </div>
 
                 {{-- Login Form Column (Right Side) --}}
