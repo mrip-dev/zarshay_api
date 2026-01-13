@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Cache;
 
 function systemDetails()
 {
-    $system['name']          = 'Moeeen Traders';
+    $system['name']          = 'Zarshay';
     $system['version']       = '2.0';
     $system['build_version'] = '5.0.9';
     return $system;

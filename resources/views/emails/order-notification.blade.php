@@ -3,7 +3,7 @@
   @slot('header')
         @component('mail::header', ['url' => config('app.url')])
             <img src="{{ $message->embed(public_path('assets/images/logo_icon/logo.png')) }}"
-                 alt="Bloomix"
+                 alt="Zarshy"
                  height="45"
                  style="height:45px; display:block; margin:0 auto;">
         @endcomponent
@@ -43,7 +43,7 @@
     @slot('footer')
         @component('mail::footer')
             <div style="text-align: center; color: #888; font-size: 12px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-                © {{ date('Y') }} Bloomix. All rights reserved.
+                © {{ date('Y') }} Zarshy. All rights reserved.
             </div>
         @endcomponent
     @endslot
