@@ -219,7 +219,7 @@ class ProductController extends Controller
                 'brand_id'       => 'nullable|exists:brands,id',
                 'unit_id'        => 'nullable|exists:units,id',
                 'alert_quantity' => 'nullable|numeric',
-                'note'           => 'nullable|string|max:500',
+                'note'           => 'nullable|string',
                 'image'          => ['nullable', 'image', new FileTypeValidate(['jpg', 'jpeg', 'png'])]
             ],
             [
