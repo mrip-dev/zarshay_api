@@ -125,25 +125,41 @@ class FileManager
     * @return void
     */
 	protected function uploadImage(){
-        $manager = new ImageManager(new Driver());
-        $image = $manager->read($this->file);
+        // Save uploaded image as-is to preserve original resolution and avoid blurring.
+        // This moves the uploaded file into the destination folder without any resize/compression.
+        $this->file->move($this->path, $this->filename);
 
-        //resize the
-	    if ($this->size) {
-	        $size = explode('x', strtolower($this->size));
-	        $image->resize($size[0], $size[1]);
-	    }
-        //save the image
-	    $image->save($this->path . '/' . $this->filename);
+        // Generate thumbnail only if requested. Read from the saved original to ensure
+        // the thumbnail is produced from the exact uploaded file.
+        if ($this->thumb) {
+            try {
+                if ($this->old) {
+                    $this->removeFile($this->path . '/thumb_' . $this->old);
+                }
 
-        //save the image as thumbnail version
-	    if ($this->thumb) {
-            if ($this->old) {
-                $this->removeFile($this->path . '/thumb_' . $this->old);
+                $manager = new ImageManager(new Driver());
+                $thumb = explode('x', $this->thumb);
+                $twidth = (int) ($thumb[0] ?? 0);
+                $theight = (int) ($thumb[1] ?? 0);
+
+                $originalPath = $this->path . '/' . $this->filename;
+                $thumbImage = $manager->read($originalPath);
+
+                if ($twidth > 0 && $theight > 0) {
+                    $thumbImage->resize($twidth, $theight, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+                    // pad to exact size so thumbnails have consistent dimensions
+                    $thumbImage->resizeCanvas($twidth, $theight, 'center', false, '#ffffff');
+                }
+
+                // save thumbnail with reasonable quality
+                $thumbImage->save($this->path . '/thumb_' . $this->filename, 90);
+            } catch (\Exception $e) {
+                // thumbnail generation failure shouldn't break the upload
             }
-	        $thumb = explode('x', $this->thumb);
-	        $manager->read($this->file)->resize($thumb[0], $thumb[1])->save($this->path . '/thumb_' . $this->filename);
-	    }
+        }
 	}
 
 
